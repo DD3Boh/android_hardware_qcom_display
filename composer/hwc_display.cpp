@@ -655,6 +655,10 @@ void HWCDisplay::BuildLayerStack() {
   layer_stack_.flags.animating = animating_;
   layer_stack_.flags.fast_path = fast_path_enabled_ && fast_path_composition_;
 
+#ifdef FOD_ZPOS
+  layer_stack_.flags.fod_pressed = false; 
+#endif
+
   DTRACE_SCOPED();
   // Add one layer for fb target
   for (auto hwc_layer : layer_set_) {
@@ -674,8 +678,6 @@ void HWCDisplay::BuildLayerStack() {
 #ifdef FOD_ZPOS
     if (hwc_layer->IsFodPressed())
       layer_stack_.flags.fod_pressed = true;
-    else
-      layer_stack_.flags.fod_pressed = false;
 #endif
 
     if (!hwc_layer->IsDataSpaceSupported()) {
