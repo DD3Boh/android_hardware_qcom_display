@@ -1121,6 +1121,8 @@ void HWDeviceDRM::SetupAtomic(HWLayers *hw_layers, bool validate) {
     }
   }
 
+  DLOGE("hw_device_drm hw_layer_count: %d", hw_layer_count);
+
   for (uint32_t i = 0; i < hw_layer_count; i++) {
     Layer &layer = hw_layer_info.hw_layers.at(i);
     LayerBuffer *input_buffer = &layer.input_buffer;
@@ -1153,7 +1155,9 @@ void HWDeviceDRM::SetupAtomic(HWLayers *hw_layers, bool validate) {
 
 #ifdef FOD_ZPOS
           uint32_t z_order = pipe_info->z_order;
+          DLOGE("hw_device_drm pre-fod_pressed check: %d", hw_layer_info.stack->flags.fod_pressed);
           if (hw_layer_info.stack->flags.fod_pressed) {
+            DLOGE("hw_device_drm fod_pressed check");
             z_order |= FOD_PRESSED_LAYER_ZORDER;
           }
           drm_atomic_intf_->Perform(DRMOps::PLANE_SET_ZORDER, pipe_id, z_order);
