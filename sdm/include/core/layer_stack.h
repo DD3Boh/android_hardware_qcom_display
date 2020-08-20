@@ -179,10 +179,6 @@ struct LayerFlags {
 
       uint32_t is_game : 1;  //!< This flag shall be set by client to indicate that this layer
                              //!< is a game layer.
-#ifdef FOD_ZPOS
-      uint32_t fod_pressed : 1;    //!< This flag shall be set internally to mark the fod pressed
-                                   //!< layer
-#endif
     };
 
     uint32_t flags = 0;       //!< For initialization purpose only.
@@ -273,6 +269,11 @@ struct LayerStackFlags {
       uint32_t mask_present : 1;  //!< Set if layer stack has mask layers.
 
       uint32_t config_changed : 1;  //!< This flag indicates Display config must be validated.
+
+#ifdef FOD_ZPOS
+      uint32_t fod_pressed : 1;    //!< This flag shall be set internally to mark the fod pressed
+                                   //!< layer
+#endif
     };
 
     uint32_t flags = 0;               //!< For initialization purpose only.
