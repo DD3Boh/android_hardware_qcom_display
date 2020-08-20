@@ -669,6 +669,7 @@ void HWCDisplay::BuildLayerStack() {
 
 #ifdef FOD_ZPOS
     if (hwc_layer->IsFodPressed()) {
+      DLOGE("hwc_display IsFodPressed check");
       layer->flags.fod_pressed = true;
     }
 #endif
